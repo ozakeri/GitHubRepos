@@ -1,0 +1,104 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: "androidx.navigation.safeargs.kotlin"
+apply plugin: 'dagger.hilt.android.plugin'
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
+
+    defaultConfig {
+        applicationId "gap.com.githubrepos"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation coreKtx.core
+    implementation coreKtx.kotlin_stdlib
+
+    implementation appCompat.appcompat
+
+    implementation legacy.legacy
+
+    implementation constraintLayout.constraintlayout
+
+    implementation room.room_runtime
+    kapt room.room_compiler
+    implementation room.room_ktx
+
+    implementation coroutines.core
+    implementation coroutines.android
+
+    implementation lifecycle.runtime
+    implementation lifecycle.viewmodel
+
+    implementation retrofit.retrofit
+    implementation retrofit.converter_gson
+    implementation retrofit.okhttp3
+
+    implementation navigation.fragment
+    implementation navigation.ui
+
+    implementation glide.glide
+    kapt glide.compiler
+
+    implementation paging.paging3
+
+    implementation omidSDK.sdk
+
+    implementation dagger_hilt.daggerHiltAndroid
+    implementation dagger_hilt.daggerHilt
+    kapt dagger_hilt.daggerHiltAndroidCompiler
+    kapt dagger_hilt.daggerHiltCompiler
+
+
+    implementation unitTest.core
+    testImplementation unitTest.junit
+    testImplementation unitTest.hamcrest
+    testImplementation unitTest.androidx_arch_core
+    testImplementation unitTest.robolectric
+    testImplementation unitTest.kotlinx_coroutines_test
+    testImplementation unitTest.truth
+    testImplementation unitTest.mockito
+
+
+    androidTestImplementation uiTest.core
+    androidTestImplementation uiTest.junit
+    androidTestImplementation uiTest.hamcrest
+    androidTestImplementation uiTest.androidx_arch_core
+    androidTestImplementation uiTest.robolectric
+    androidTestImplementation uiTest.kotlinx_coroutines_test
+    androidTestImplementation uiTest.truth
+    androidTestImplementation uiTest.mockito
+    androidTestImplementation uiTest.dexmaker_mockito
+    androidTestImplementation uiTest.espresso
+    androidTestImplementation uiTest.test_hilt_android
+    kaptAndroidTest uiTest.test_hilt_compiler
+    implementation uiTest.ext_junit
+    debugImplementation uiTest.fragment
+    androidTestImplementation uiTest.contrib
+}
