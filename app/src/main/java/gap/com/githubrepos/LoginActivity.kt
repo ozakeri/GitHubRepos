@@ -31,7 +31,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         val username = edt_username.text.toString().trim()
         showProgressBar(authProgressBar)
 
-        if (checkBox.isChecked && StringHelper.stringIsEmptyOrNull(
+        if (checkBox.isChecked && !StringHelper.stringIsEmptyOrNull(
                 edt_username.text.toString().trim()
             )
         ) {
