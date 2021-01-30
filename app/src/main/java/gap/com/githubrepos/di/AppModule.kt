@@ -1,4 +1,4 @@
-package gap.com.githubrepos.module
+package gap.com.githubrepos.di
 
 import com.faramarzaf.sdk.af_android_sdk.core.network.ServiceRepository
 import dagger.Module

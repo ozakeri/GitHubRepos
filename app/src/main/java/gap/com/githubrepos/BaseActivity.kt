@@ -33,6 +33,7 @@ abstract class BaseActivity : AppCompatActivity() {
         return MyPreferences.readString(this, KEY_SESSION_ID, "")
     }
 
+
     open fun toActivity(classOf: Class<*>) {
         startActivity(Intent(applicationContext, classOf))
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)

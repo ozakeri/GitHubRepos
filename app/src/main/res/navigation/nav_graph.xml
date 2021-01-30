@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/reposFragment">
+
+    <fragment
+        android:id="@+id/reposFragment"
+        android:name="gap.com.githubrepos.fragment.ReposFragment"
+        android:label="fragment_repos"
+        tools:layout="@layout/fragment_repos" />
+    <fragment
+        android:id="@+id/starredFragment"
+        android:name="gap.com.githubrepos.fragment.StarredFragment"
+        android:label="fragment_starred"
+        tools:layout="@layout/fragment_starred" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="gap.com.githubrepos.fragment.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="gap.com.githubrepos.fragment.FavoriteFragment"
+        android:label="fragment_favorite"
+        tools:layout="@layout/fragment_favorite" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="gap.com.githubrepos.fragment.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+</navigation>
