@@ -88,9 +88,12 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun saveUsefulUrls(response: SearchResponse) {
+        val username = edt_username.text.toString().trim()
         for (info in response.items) {
-            MyPreferences.writeString(this, KEY_AVATAR_URL, info.avatarUrl.toString())
-            MyPreferences.writeString(this, KEY_HTML_URL, info.htmlUrl.toString())
+            if (info.login.equals(username)) {
+                MyPreferences.writeString(this, KEY_AVATAR_URL, info.avatarUrl.toString())
+                MyPreferences.writeString(this, KEY_HTML_URL, info.htmlUrl.toString())
+            }
         }
     }
 
