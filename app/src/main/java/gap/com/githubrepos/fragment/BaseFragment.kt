@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.faramarzaf.sdk.af_android_sdk.core.helper.ScreenHelper
 import com.faramarzaf.sdk.af_android_sdk.core.ui.dialog.ProgressDialogCustom
 import gap.com.githubrepos.R
+import kotlinx.android.synthetic.main.fragment_repos.*
 
 abstract class BaseFragment : Fragment() {
 

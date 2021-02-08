@@ -7,6 +7,9 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import gap.com.githubrepos.network.GitHubApi
 import gap.com.githubrepos.repository.AuthRepository
+import gap.com.githubrepos.repository.FollowerRepository
+import gap.com.githubrepos.repository.FollowingRepository
+import gap.com.githubrepos.repository.ReposRepository
 import gap.com.githubrepos.utils.BASE_URL
 import javax.inject.Singleton
 
@@ -20,8 +23,25 @@ object AppModule {
 
     @Singleton
     @Provides
+    fun provideFollowerRepository(api: GitHubApi) = FollowerRepository(api)
+
+    @Singleton
+    @Provides
+    fun provideFollowingRepository(api: GitHubApi) = FollowingRepository(api)
+
+    @Singleton
+    @Provides
+    fun provideReposRepository(api: GitHubApi) = ReposRepository(api)
+
+    @Singleton
+    @Provides
     fun provideGitHubApi(): GitHubApi {
-        val api by lazy { ServiceRepository.ServiceBuilder.buildService(BASE_URL, GitHubApi::class.java) }
+        val api by lazy {
+            ServiceRepository.ServiceBuilder.buildService(
+                BASE_URL,
+                GitHubApi::class.java
+            )
+        }
         return api
     }
 }
