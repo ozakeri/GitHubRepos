@@ -41,4 +41,11 @@ interface GitHubApi {
         , @Query("page") page: Int
         , @Query("per_page") per_page: Int
     ): StarredResponse
+
+    @GET("/search/users")
+    suspend fun searchUser(
+        @Query("q") username: String
+        , @Query("page") page: Int
+        , @Query("per_page") per_page: Int
+    ): SearchResponse
 }

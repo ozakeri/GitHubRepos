@@ -36,6 +36,10 @@ object AppModule {
 
     @Singleton
     @Provides
+    fun provideSearchRepository(api: GitHubApi) = SearchRepository(api)
+
+    @Singleton
+    @Provides
     fun provideGitHubApi(): GitHubApi {
         val api by lazy {
             ServiceRepository.ServiceBuilder.buildService(
