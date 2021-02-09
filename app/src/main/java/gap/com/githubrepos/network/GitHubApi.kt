@@ -1,6 +1,7 @@
 package gap.com.githubrepos.network
 
 import app.android.githubservice.entity.follower_following.FollowerFollowingResponse
+import app.android.githubservice.entity.starred.StarredResponse
 import gap.com.githubrepos.entitiy.SearchResponse
 import gap.com.githubrepos.entitiy.repo.RepositoryResponse
 import retrofit2.http.GET
@@ -32,4 +33,12 @@ interface GitHubApi {
         , @Query("page") page: Int
         , @Query("per_page") per_page: Int
     ): FollowerFollowingResponse
+
+
+    @GET("/users/{user}/starred")
+    suspend fun getStarredRepositories(
+        @Path("user") username: String
+        , @Query("page") page: Int
+        , @Query("per_page") per_page: Int
+    ): StarredResponse
 }

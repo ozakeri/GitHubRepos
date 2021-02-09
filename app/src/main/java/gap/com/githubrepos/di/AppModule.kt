@@ -6,10 +6,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import gap.com.githubrepos.network.GitHubApi
-import gap.com.githubrepos.repository.AuthRepository
-import gap.com.githubrepos.repository.FollowerRepository
-import gap.com.githubrepos.repository.FollowingRepository
-import gap.com.githubrepos.repository.ReposRepository
+import gap.com.githubrepos.repository.*
 import gap.com.githubrepos.utils.BASE_URL
 import javax.inject.Singleton
 
@@ -32,6 +29,10 @@ object AppModule {
     @Singleton
     @Provides
     fun provideReposRepository(api: GitHubApi) = ReposRepository(api)
+
+    @Singleton
+    @Provides
+    fun provideStarRepository(api: GitHubApi) = StaredRepository(api)
 
     @Singleton
     @Provides
