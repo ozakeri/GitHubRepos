@@ -61,6 +61,9 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
             getViewFromAdapter?.let { views ->
                 views(imageFav)
             }
+            setOnClickListener {
+                onItemClickListener?.let { it(searchInfo) }
+            }
         }
     }
 

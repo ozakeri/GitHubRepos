@@ -107,10 +107,10 @@ class SearchFragment : BaseFragment() {
 
             setOnSaveUserClickListener { item, imageView ->
                 if (!searchViewModel.ifUserExist(item)) {
-                    imageView.setColorFilter(Color.WHITE)
+                    imageView.setColorFilter(Color.RED)
                     saveUser(item)
                 } else {
-                    imageView.setColorFilter(Color.RED)
+                    imageView.setColorFilter(Color.WHITE)
                     toast("User is already in favorites!")
                 }
             }

@@ -1,18 +1,34 @@
 package gap.com.githubrepos.di
 
+import android.content.Context
+import androidx.room.Room
 import com.faramarzaf.sdk.af_android_sdk.core.network.ServiceRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
+import gap.com.githubrepos.db.GitHubDatabase
 import gap.com.githubrepos.network.GitHubApi
 import gap.com.githubrepos.repository.*
 import gap.com.githubrepos.utils.BASE_URL
+import gap.com.githubrepos.utils.DATABASE_NAME
 import javax.inject.Singleton
 
 @Module
 @InstallIn(ApplicationComponent::class)
 object AppModule {
+
+    @Singleton
+    @Provides
+    fun provideGitHubDatabase(gitHubDatabase: GitHubDatabase) = gitHubDatabase.getGitHubDao()
+
+    @Singleton
+    @Provides
+    fun provideGitHubDao(@ApplicationContext context: Context) = Room.databaseBuilder(
+        context, GitHubDatabase::class.java,
+        DATABASE_NAME
+    ).allowMainThreadQueries().build()
 
     @Singleton
     @Provides
@@ -36,7 +52,8 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideSearchRepository(api: GitHubApi) = SearchRepository(api)
+    fun provideSearchRepository(gitHubApi: GitHubApi, gitHubDatabase: GitHubDatabase) =
+        SearchRepository(gitHubApi, gitHubDatabase)
 
     @Singleton
     @Provides
