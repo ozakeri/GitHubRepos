@@ -14,3 +14,5 @@ const val KEY_NUMBER_FOLLOWING = "key_number_following"
 const val KEY_SIZE_LIST_REPO = "key_size_list_repo"
 const val TAG_LOG = "TAG00"
 const val DATABASE_NAME = "github_db.db"
+const val DELAY_GUARD_CLICK = 800L
+const val TAG_BOTTOM_SHEET = "bottom_sheet"
