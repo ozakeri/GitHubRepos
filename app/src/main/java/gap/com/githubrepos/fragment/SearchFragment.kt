@@ -1,5 +1,6 @@
 package gap.com.githubrepos.fragment
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.core.widget.addTextChangedListener
@@ -10,13 +11,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import gap.com.githubrepos.R
 import gap.com.githubrepos.adapter.SearchAdapter
+import gap.com.githubrepos.entitiy.Item
 import gap.com.githubrepos.utils.CACHE_SIZE
 import gap.com.githubrepos.utils.MAX_PAGE
 import gap.com.githubrepos.utils.MIN_PAGE
 import gap.com.githubrepos.utils.Resource
 import gap.com.githubrepos.viewmodel.SearchViewModel
 import kotlinx.android.synthetic.main.fragment_search.*
-import kotlinx.android.synthetic.main.fragment_starred.*
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -35,6 +36,7 @@ class SearchFragment : BaseFragment() {
         setupRecyclerView()
         getUsersList()
         observeSearchRepository()
+        favoriteUserOperation()
     }
 
     fun setupRecyclerView() {
@@ -55,9 +57,9 @@ class SearchFragment : BaseFragment() {
                 showProgressBar(searchProgressBar)
                 delay(500)
                 editable.let {
-                    if (editable.toString().isNotEmpty()){
+                    if (editable.toString().isNotEmpty()) {
                         searchViewModel.search(editable.toString(), MIN_PAGE, MAX_PAGE)
-                    }else{
+                    } else {
                         hideProgressBar(searchProgressBar)
                     }
                 }
@@ -68,7 +70,7 @@ class SearchFragment : BaseFragment() {
     private fun observeSearchRepository() {
 
         searchViewModel.searchResponse.observe(viewLifecycleOwner, Observer { response ->
-            when(response){
+            when (response) {
                 is Resource.Success -> {
                     hideProgressBar(searchProgressBar)
                     searchAdapter.differ.submitList(response.value.items)
@@ -84,6 +86,39 @@ class SearchFragment : BaseFragment() {
 
         })
 
+    }
+
+    private fun favoriteUserOperation() {
+        with(searchAdapter) {
+            getItemInstance {
+                getViewFromAdapter { views ->
+                    if (!searchViewModel.ifUserExist(it)) {
+                        views.setColorFilter(Color.WHITE)
+                    } else {
+                        views.setColorFilter(Color.RED)
+                    }
+
+                }
+            }
+
+            setOnItemClickListener {
+                toast(it.login)
+            }
+
+            setOnSaveUserClickListener { item, imageView ->
+                if (!searchViewModel.ifUserExist(item)) {
+                    imageView.setColorFilter(Color.WHITE)
+                    saveUser(item)
+                } else {
+                    imageView.setColorFilter(Color.RED)
+                    toast("User is already in favorites!")
+                }
+            }
+        }
+    }
+
+    private fun saveUser(item: Item) {
+        searchViewModel.insertUser(item)
     }
 
 }
